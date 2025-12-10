@@ -21,7 +21,7 @@ public class Coordinator {
             producer.send(new ProducerRecord<>("Command", "Start"));
             System.out.println("Sent Start on topic Command");
             try {
-                Thread.sleep(120000);
+                Thread.sleep(30000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

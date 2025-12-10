@@ -14,7 +14,7 @@ import java.util.Random;
  * @author Aleksandar
  */
 public class EmulatedSystemClock {
-
+    private long scalarTime;
     private long startTime;
     private double jitter; //jitter per second,  percentage of deviation per 1 second
 
@@ -26,10 +26,16 @@ public class EmulatedSystemClock {
 
     public long currentTimeMillis() {
         long current = System.currentTimeMillis();
-        long diff =current - startTime;
+        long diff = current - startTime;
         double coef = diff / 1000;
         return startTime + Math.round(diff * Math.pow((1+jitter), coef));
     }
+
+    public long update(long receivedTime){
+        scalarTime = Math.max(scalarTime, receivedTime + 1);
+        return scalarTime;
+    }
+
 
 
 }
